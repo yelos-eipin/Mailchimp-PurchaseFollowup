@@ -30,24 +30,24 @@ class PFW:
 
             sql = """
                     SELECT 
-                    cust.cu_cus "Customer Number"
-                    ,cust.cu_br "Branch"
-                    ,CASE mh.bh_bc
-                        WHEN 'I' THEN 'Equipment Billing'
-                        WHEN 'T' THEN 'Rental'      
-                        WHEN 'W' THEN 'Work Order'      
-                        WHEN 'S' THEN 'Parts Order'      
-                        WHEN 'P' THEN 'Parts Invoicing'
-                        ELSE mh.bh_bc
-                    END AS "Purchase Type"
-                    ,mh.bh_ord "Invoice Number"
-                    ,SUM( md.bd_prc ) AS "Amount"
-                    ,contact.cc_bem "Email"
+                    -- cust.cu_cus "Customer Number"
+                    cust.cu_br "Branch"
                     ,cust.cu_nme "Customer Name"
-                    ,cust.cu_ad1 "Address"
-                    ,CUST.cu_cit "City"
-                    ,cust.cu_prv "Province"
+                    ,contact.cc_bem "Email"
                     ,mh.bh_bdt "Purchase Date"
+                    -- ,CASE mh.bh_bc
+                    --    WHEN 'I' THEN 'Equipment Billing'
+                    --    WHEN 'T' THEN 'Rental'      
+                    --    WHEN 'W' THEN 'Work Order'      
+                    --    WHEN 'S' THEN 'Parts Order'      
+                    --    WHEN 'P' THEN 'Parts Invoicing'
+                    --    ELSE mh.bh_bc
+                    --END AS "Purchase Type"
+                    --,mh.bh_ord "Invoice Number"
+                    --,SUM( md.bd_prc ) AS "Amount"
+                    --,cust.cu_ad1 "Address"
+                    --,CUST.cu_cit "City"
+                    --,cust.cu_prv "Province"
                     FROM 
                     mnbdh mh
                     INNER JOIN cmastr AS cust
@@ -65,7 +65,7 @@ class PFW:
                         AND mh.bh_div = md.bd_div
                         AND mh.bh_br = md.bd_br
                     WHERE
-                    mh.bh_bdt >= VARCHAR_FORMAT(current timestamp - 32 DAYS,'YYYYMMDD')
+                    mh.bh_bdt >= VARCHAR_FORMAT(current timestamp - 1 DAYS,'YYYYMMDD')
                     AND cust.cu_cus NOT LIKE 'CASH%'
                     AND cust.cu_cus NOT LIKE 'INTER%'
                     AND cust.cu_cus NOT LIKE 'JDWAR%'
@@ -149,24 +149,24 @@ class PFW:
 
         sql = """
                     SELECT 
-                    cust.cu_cus "Customer Number"
-                    ,cust.cu_br "Branch"
-                    ,CASE mh.bh_bc
-                        WHEN 'I' THEN 'Equipment Billing'
-                        WHEN 'T' THEN 'Rental'      
-                        WHEN 'W' THEN 'Work Order'      
-                        WHEN 'S' THEN 'Parts Order'      
-                        WHEN 'P' THEN 'Parts Invoicing'
-                        ELSE mh.bh_bc
-                    END AS "Purchase Type"
-                    ,mh.bh_ord "Invoice Number"
-                    ,SUM( md.bd_prc ) AS "Amount"
-                    ,contact.cc_bem "Email"
+                    --cust.cu_cus "Customer Number"
+                    cust.cu_br "Branch"
                     ,cust.cu_nme "Customer Name"
-                    ,cust.cu_ad1 "Address"
-                    ,CUST.cu_cit "City"
-                    ,cust.cu_prv "Province"
+                    ,contact.cc_bem "Email"
                     ,mh.bh_bdt "Purchase Date"
+                    --,CASE mh.bh_bc
+                    --    WHEN 'I' THEN 'Equipment Billing'
+                    --    WHEN 'T' THEN 'Rental'      
+                    --    WHEN 'W' THEN 'Work Order'      
+                    --    WHEN 'S' THEN 'Parts Order'      
+                    --    WHEN 'P' THEN 'Parts Invoicing'
+                    --    ELSE mh.bh_bc
+                    --END AS "Purchase Type"
+                    --,mh.bh_ord "Invoice Number"
+                    --,SUM( md.bd_prc ) AS "Amount"
+                    --,cust.cu_ad1 "Address"
+                    --,CUST.cu_cit "City"
+                    --,cust.cu_prv "Province"
                     FROM 
                     mnbdh mh
                     INNER JOIN cmastr AS cust
@@ -184,7 +184,7 @@ class PFW:
                         AND mh.bh_div = md.bd_div
                         AND mh.bh_br = md.bd_br
                     WHERE
-                    mh.bh_bdt >= VARCHAR_FORMAT(current timestamp - 32 DAYS,'YYYYMMDD')
+                    mh.bh_bdt >= VARCHAR_FORMAT(current timestamp - 1 DAYS,'YYYYMMDD')
                     AND cust.cu_cus NOT LIKE 'CASH%'
                     AND cust.cu_cus NOT LIKE 'INTER%'
                     AND cust.cu_cus NOT LIKE 'JDWAR%'
@@ -266,24 +266,24 @@ class PFW:
 
         sql = """
                     SELECT 
-                    cust.cu_cus "Customer Number"
-                    ,cust.cu_br "Branch"
-                    ,CASE mh.bh_bc
-                        WHEN 'I' THEN 'Equipment Billing'
-                        WHEN 'T' THEN 'Rental'      
-                        WHEN 'W' THEN 'Work Order'      
-                        WHEN 'S' THEN 'Parts Order'      
-                        WHEN 'P' THEN 'Parts Invoicing'
-                        ELSE mh.bh_bc
-                    END AS "Purchase Type"
-                    ,mh.bh_ord "Invoice Number"
-                    ,SUM( md.bd_prc ) AS "Amount" -- journal entries seem to show up NEGATIVE for positive charges.
-                    ,contact.cc_bem "Email"
+                    --cust.cu_cus "Customer Number"
+                    cust.cu_br "Branch"
                     ,cust.cu_nme "Customer Name"
-                    ,cust.cu_ad1 "Address"
-                    ,CUST.cu_cit "City"
-                    ,cust.cu_prv "Province"
+                    ,contact.cc_bem "Email"
                     ,mh.bh_bdt "Purchase Date"
+                    --,CASE mh.bh_bc
+                    --    WHEN 'I' THEN 'Equipment Billing'
+                    --    WHEN 'T' THEN 'Rental'      
+                    --    WHEN 'W' THEN 'Work Order'      
+                    --    WHEN 'S' THEN 'Parts Order'      
+                    --    WHEN 'P' THEN 'Parts Invoicing'
+                    --    ELSE mh.bh_bc
+                    --END AS "Purchase Type"
+                    --,mh.bh_ord "Invoice Number"
+                    --,SUM( md.bd_prc ) AS "Amount" -- journal entries seem to show up NEGATIVE for positive charges.
+                    --,cust.cu_ad1 "Address"
+                    --,CUST.cu_cit "City"
+                    --,cust.cu_prv "Province"
                     FROM 
                     mnbdh mh
                     INNER JOIN cmastr AS cust
@@ -301,7 +301,7 @@ class PFW:
                         AND mh.bh_div = md.bd_div
                         AND mh.bh_br = md.bd_br
                     WHERE
-                    mh.bh_bdt >= VARCHAR_FORMAT(current timestamp - 32 DAYS,'YYYYMMDD')
+                    mh.bh_bdt >= VARCHAR_FORMAT(current timestamp - 1 DAYS,'YYYYMMDD')
                     AND cust.cu_cus NOT LIKE 'CASH%'
                     AND cust.cu_cus NOT LIKE 'INTER%'
                     AND cust.cu_cus NOT LIKE 'JDWAR%'
